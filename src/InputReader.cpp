@@ -1,5 +1,6 @@
 #include "InputReader.hpp"
 #ifdef __linux__
+#include <cstdio>
 #include <termios.h>
 #include <unistd.h>
 char InputReader::ReadInput()
@@ -12,14 +13,16 @@ char InputReader::ReadInput()
     current.c_cc[ VMIN ] = 1;         // 设置非正规模式下的最小字符数
     current.c_cc[ VTIME ] = 0;        // 设置非正规模式下的读延时
     tcsetattr(0, TCSANOW, &current);  // 设置新的终端属性
-    inputchar = getchar();
+    char inputchar = std::getchar();
     tcsetattr(0, TCSANOW, &save);
+    return inputchar;
 }
 #elif defined(_WIN32)
 #include <conio.h>
 char InputReader::ReadInput()
 {
     return static_cast<char>(_getch());
+
 }
 #endif
 
