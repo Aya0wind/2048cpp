@@ -1,4 +1,7 @@
 #include <array>
+/*
+ * ÓÎÏ·ËùĞè×Ö·û
+ */
 namespace Resources {
 
 constexpr char horizontal_line[] = "©¤";

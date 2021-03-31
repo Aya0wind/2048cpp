@@ -1,4 +1,7 @@
 #pragma once
+/*
+ * 游戏界面类
+ */
 #include <map>
 #include <string>
 #include <vector>

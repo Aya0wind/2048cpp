@@ -1,5 +1,7 @@
 #pragma once
-
+/*
+ * 输入读取类
+ */
 class InputReader {
 public:
     enum class Direction { UP = 100, DOWN = 101, RIGHT = 102, LEFT = 103, NONE = 104 };

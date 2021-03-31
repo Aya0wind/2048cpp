@@ -2,6 +2,9 @@
 #include <sstream>
 #include <string>
 namespace Color {
+/*
+ * 设置字符串颜色，使用ANSI转义序列实现
+ */
 enum class ColorNum {
     none,
     black,
