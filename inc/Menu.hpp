@@ -1,23 +1,23 @@
 #pragma once
 #include "InputReader.hpp"
 /*
- * ½çÃæ»ùÀà
+ * ç•Œé¢åŸºç±»
  */
 class Menu {
 public:
-    //²Ëµ¥×´Ì¬
+    //èœå•çŠ¶æ€
     enum class MenuStatus {
-        //Ö÷²Ëµ¥
+        //ä¸»èœå•
         MAIN_MENU = 0,
-        //·ÖÊı²Ëµ¥
+        //åˆ†æ•°èœå•
         SCORE_MENU = 1,
-        //¿ªÊ¼²Ëµ¥
+        //å¼€å§‹èœå•
         START_MENU = 3,
-        //ÓÎÏ·½çÃæ
+        //æ¸¸æˆç•Œé¢
         GAME_WINDOW = 4,
-        //½áÊø²Ëµ¥
+        //ç»“æŸèœå•
         OVER_WINDOW = 5,
-        //ÍË³öÓÎÏ·
+        //é€€å‡ºæ¸¸æˆ
         EXIT = 6
     };
     static MenuStatus CurrentStatus;
@@ -26,10 +26,10 @@ public:
     void SingleLoop();
 
 protected:
-    //³õÊ¼»¯²Ëµ¥
+    //åˆå§‹åŒ–èœå•
     virtual void InitMenu() = 0;
-    //»æÖÆ²Ëµ¥
+    //ç»˜åˆ¶èœå•
     virtual void Draw() = 0;
-    //¶ÁÈ¡ÓÃ»§ÊäÈë
+    //è¯»å–ç”¨æˆ·è¾“å…¥
     virtual void ProcessInput() = 0;
 };

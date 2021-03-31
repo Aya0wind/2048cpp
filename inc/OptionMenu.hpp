@@ -5,7 +5,7 @@
 #include "Menu.hpp"
 
 /*
- * Ñ¡Ôñ²Ëµ¥Àà
+ * é€‰æ‹©èœå•ç±»
  */
 class OptionMenu : public Menu {
 protected:

@@ -5,13 +5,13 @@
 void InputReader::ReadInput()
 {
     struct termios save, current;
-    tcgetattr(0, &save);  // µÃµ½Ô­À´µÄÖÕ¶ËÊôĞÔ
+    tcgetattr(0, &save);  // å¾—åˆ°åŸæ¥çš„ç»ˆç«¯å±æ€§
     current = save;
-    current.c_lflag &= ~ICANON;  // ÉèÖÃ·ÇÕı¹æÄ£Ê½£¬Èç¹û³ÌĞòÃ¿´ÎÒª´ÓÖÕ¶Ë¶ÁÈ¡Ò»¸ö×Ö·ûµÄ»°£¬ÕâÊÇ±ØĞëµÄ
-    current.c_lflag &= ~ECHO;         // ¹Ø±Õ»ØÏÔ
-    current.c_cc[ VMIN ] = 1;         // ÉèÖÃ·ÇÕı¹æÄ£Ê½ÏÂµÄ×îĞ¡×Ö·ûÊı
-    current.c_cc[ VTIME ] = 0;        // ÉèÖÃ·ÇÕı¹æÄ£Ê½ÏÂµÄ¶ÁÑÓÊ±
-    tcsetattr(0, TCSANOW, &current);  // ÉèÖÃĞÂµÄÖÕ¶ËÊôĞÔ
+    current.c_lflag &= ~ICANON;  // è®¾ç½®éæ­£è§„æ¨¡å¼ï¼Œå¦‚æœç¨‹åºæ¯æ¬¡è¦ä»ç»ˆç«¯è¯»å–ä¸€ä¸ªå­—ç¬¦çš„è¯ï¼Œè¿™æ˜¯å¿…é¡»çš„
+    current.c_lflag &= ~ECHO;         // å…³é—­å›æ˜¾
+    current.c_cc[ VMIN ] = 1;         // è®¾ç½®éæ­£è§„æ¨¡å¼ä¸‹çš„æœ€å°å­—ç¬¦æ•°
+    current.c_cc[ VTIME ] = 0;        // è®¾ç½®éæ­£è§„æ¨¡å¼ä¸‹çš„è¯»å»¶æ—¶
+    tcsetattr(0, TCSANOW, &current);  // è®¾ç½®æ–°çš„ç»ˆç«¯å±æ€§
     inputchar = getchar();
     tcsetattr(0, TCSANOW, &save);
 }

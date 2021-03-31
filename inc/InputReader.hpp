@@ -1,6 +1,6 @@
 #pragma once
 /*
- * ÊäÈë¶ÁÈ¡Àà
+ * è¾“å…¥è¯»å–ç±»
  */
 class InputReader {
 public:

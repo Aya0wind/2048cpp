@@ -3,7 +3,7 @@
 #include <string>
 namespace Color {
 /*
- * 设置字符串颜色，使用ANSI转义序列实现
+ * 璁剧疆瀛楃涓查鑹诧紝浣跨敤ANSI杞箟搴忓垪瀹炵幇
  */
 enum class ColorNum {
     none,
