@@ -2,7 +2,7 @@
 #ifdef __linux__
 #include <termios.h>
 #include <unistd.h>
-void InputReader::ReadInput()
+char InputReader::ReadInput()
 {
     struct termios save, current;
     tcgetattr(0, &save);  // 得到原来的终端属性
