@@ -16,7 +16,7 @@ protected:
     virtual void DrawTitle();
     virtual void DrawOptions();
 
-    void ReadDirection();
+    void ReadDirection(char i);
     inline void PlusCurStage()
     {
         if (CurrentStage == options.size())

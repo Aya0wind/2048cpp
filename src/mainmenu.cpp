@@ -7,10 +7,10 @@ void MainMenu::ProcessInput()
 {
     using MenuStatus = Menu::MenuStatus;
     using Direction = InputReader::Direction;
-    using Character = InputReader::Character;
-    InputReader::ReadInput();
-    ReadDirection();
-    if (InputReader::GetEffectiveOption() == Character::SPACE) {
+    using Character = InputReader::Key;
+    char keyValue=InputReader::ReadInput();
+    ReadDirection(keyValue);
+    if (InputReader::GetEffectiveOption(keyValue) == Character::SPACE) {
         if (CurrentStage == 1) {
             Menu::CurrentStatus = MenuStatus::START_MENU;
             Menu::StatusIsChanged = true;

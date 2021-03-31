@@ -1,6 +1,4 @@
 #include "InputReader.hpp"
-
-#include <iostream>
 #ifdef __linux__
 #include <termios.h>
 #include <unistd.h>
@@ -19,38 +17,31 @@ void InputReader::ReadInput()
 }
 #elif defined(_WIN32)
 #include <conio.h>
-void InputReader::ReadInput()
+char InputReader::ReadInput()
 {
-    inputKey = static_cast<char>(_getch());
+    return static_cast<char>(_getch());
 }
 #endif
 
-InputReader::Direction InputReader::direction = InputReader::Direction::NONE;
-InputReader::Character InputReader::character = InputReader::Character::INVAILD;
-char InputReader::inputKey = '^';
-char InputReader::GetInputChar()
-{
-    return inputKey;
-}
-InputReader::Character InputReader::GetEffectiveOption()
+InputReader::Key InputReader::GetEffectiveOption(const char inputKey)
 {
     switch (inputKey) {
         case ' ':
-            return Character::SPACE;
+            return Key::SPACE;
         case 'E':
         case 'e':
-            return Character::EXIT;
+            return Key::EXIT;
         case 'P':
         case 'p':
-            return Character::PAUSE;
+            return Key::PAUSE;
         case 'I':
         case 'i':
-            return Character::SAVE;
+            return Key::SAVE;
         default:
-            return Character::INVAILD;
+            return Key::INVAILD;
     }
 }
-InputReader::Direction InputReader::GetDirection()
+InputReader::Direction InputReader::GetDirection(const char inputKey)
 {
     switch (inputKey) {
         case 'W':

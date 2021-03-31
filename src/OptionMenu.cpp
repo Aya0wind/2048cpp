@@ -33,10 +33,10 @@ void OptionMenu::DrawOptions()
     }
     std::cout << Options_tmp.str() << std::endl;
 }
-void OptionMenu::ReadDirection()
+void OptionMenu::ReadDirection(char keyValue)
 {
     using Direction = InputReader::Direction;
-    Direction curDirection = InputReader::GetDirection();
+    Direction curDirection = InputReader::GetDirection(keyValue);
     switch (curDirection) {
         case Direction::UP:
             GetEffectiveInput = true;
@@ -53,11 +53,11 @@ void OptionMenu::ReadDirection()
 void OptionMenu::ProcessInput()
 {
     using Direction = InputReader::Direction;
-    using Character = InputReader::Character;
-    InputReader::ReadInput();
-    ReadDirection();
-    switch (InputReader::GetEffectiveOption()) {
-        case Character::SPACE:
+    using Key = InputReader::Key;
+    char keyValue=InputReader::ReadInput();
+    ReadDirection(keyValue);
+    switch (InputReader::GetEffectiveOption(keyValue)) {
+        case Key::SPACE:
             if (CurrentStage == 1) {
                 Menu::CurrentStatus = MenuStatus::GAME_WINDOW;
                 Menu::StatusIsChanged = true;

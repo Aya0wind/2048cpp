@@ -44,10 +44,10 @@ void GameBoard::Draw()
 void GameBoard::ProcessInput()
 {
     using Direction = InputReader::Direction;
-    using Option = InputReader::Character;
-    InputReader::ReadInput();
-    Direction direction = InputReader::GetDirection();
-    Option option = InputReader::GetEffectiveOption();
+    using Option = InputReader::Key;
+    char keyValue=InputReader::ReadInput();
+    Direction direction = InputReader::GetDirection(keyValue);
+    Option option = InputReader::GetEffectiveOption(keyValue);
     if (direction != Direction::NONE) {
         if (!pause) {
             MoveNums(direction);
@@ -95,7 +95,7 @@ void GameBoard::DrawBoard()
     DrawDownLine(tmp);
     DrawPrompt(tmp);
     if (pause)
-        tmp << "\n\n\t游戏暂停中！";
+        tmp << "\n\n\tGame paused!";
     std::cout << tmp.str() << std::flush;
 }
 std::ostringstream& GameBoard::DrawUpLine(std::ostringstream& tmp) const

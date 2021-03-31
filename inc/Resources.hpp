@@ -23,7 +23,7 @@ constexpr char border_right[] = "┤";
 
 constexpr char border_middle_down[] = "┴";
 
-constexpr std::array<const char*, 4> ScoreBoardItems = {"  分数:", "  高分:", "  时间:", "  步数:"};
+constexpr std::array<const char*, 4> ScoreBoardItems = {"  分数:", "  高分:", "  步数:"};
 constexpr std::array<const char*, 3> MainMenuItems = {
     "1--开始游戏",
     "2--高分榜",
