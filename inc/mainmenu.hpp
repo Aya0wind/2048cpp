@@ -3,7 +3,7 @@
 
 #include "OptionMenu.hpp"
 /*
- * 涓荤晫闈㈢被
+ * 主界面类
  */
 class MainMenu : public OptionMenu {
 public:
