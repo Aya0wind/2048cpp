@@ -1,45 +1,45 @@
 #include <array>
 /*
- * ÓÎÏ·ËùĞè×Ö·û
+ * æ¸¸æˆæ‰€éœ€å­—ç¬¦
  */
 namespace Resources {
 
-constexpr char horizontal_line[] = "©¤";
+constexpr char horizontal_line[] = "â”€";
 
-constexpr char vertical_line[] = "©¦";
+constexpr char vertical_line[] = "â”‚";
 
-constexpr char border_left_up[] = "©°";
+constexpr char border_left_up[] = "â”Œ";
 
-constexpr char border_left_down[] = "©¸";
+constexpr char border_left_down[] = "â””";
 
-constexpr char border_right_up[] = "©´";
+constexpr char border_right_up[] = "â”";
 
-constexpr char border_right_down[] = "©¼";
+constexpr char border_right_down[] = "â”˜";
 
-constexpr char border_middle[] = "©à";
+constexpr char border_middle[] = "â”¼";
 
-constexpr char border_middle_up[] = "©Ğ";
+constexpr char border_middle_up[] = "â”¬";
 
-constexpr char border_left[] = "©À";
+constexpr char border_left[] = "â”œ";
 
-constexpr char border_right[] = "©È";
+constexpr char border_right[] = "â”¤";
 
-constexpr char border_middle_down[] = "©Ø";
+constexpr char border_middle_down[] = "â”´";
 
-constexpr std::array<const char*, 4> ScoreBoardItems = {"  ·ÖÊı:", "  ¸ß·Ö:", "  ²½Êı:"};
+constexpr std::array<const char*, 4> ScoreBoardItems = {"  åˆ†æ•°:", "  é«˜åˆ†:", "  æ­¥æ•°:"};
 constexpr std::array<const char*, 3> MainMenuItems = {
-    "1--¿ªÊ¼ÓÎÏ·",
-    "2--¸ß·Ö°ñ",
-    "3--ÍË³öÓÎÏ·",
+    "1--å¼€å§‹æ¸¸æˆ",
+    "2--é«˜åˆ†æ¦œ",
+    "3--é€€å‡ºæ¸¸æˆ",
 };
 constexpr char Prompts[] = R"(
-  WASDÉÏÏÂ×óÓÒÒÆ¶¯
-  P¼üÔİÍ£
-  I¼ü±£´æÓÎÏ·
-  E¼üÍË»ØÖ÷²Ëµ¥
+  WASDä¸Šä¸‹å·¦å³ç§»åŠ¨
+  Pé”®æš‚åœ
+  Ié”®ä¿å­˜æ¸¸æˆ
+  Eé”®é€€å›ä¸»èœå•
 )";
 
-constexpr char OptionMenuTitle[] = "Ñ¡Ôñ¸ñÊı£¨Ä¬ÈÏ4X4´óĞ¡£©";
+constexpr char OptionMenuTitle[] = "é€‰æ‹©æ ¼æ•°ï¼ˆé»˜è®¤4X4å¤§å°ï¼‰";
 
 constexpr char title_2048[] = R"(
    /\\\\\\\\\          /\\\\\\\                /\\\         /\\\\\\\\\
