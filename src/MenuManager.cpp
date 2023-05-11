@@ -6,6 +6,17 @@
 #include "OptionMenu.hpp"
 #include "ScoreBoard.hpp"
 #include "mainmenu.hpp"
+namespace  {
+void clear() {
+    #if defined (_WIN32) || defined (_WIN64)
+        system("cls");
+    #elif __linux__
+        system("clear");
+    #else
+        system("clear");
+    #endif
+}
+}
 
 /*
  * 开始菜单，主循环
@@ -15,7 +26,7 @@ void MenuManager::StartMenu()
 {
     using MenuStatus = Menu::MenuStatus;
     while (Menu::CurrentStatus != Menu::MenuStatus::EXIT) {
-        system("cls");
+        ::clear();
         Menu::StatusIsChanged = false;
         if (Menu::CurrentStatus == MenuStatus::MAIN_MENU) {
             MainMenu menu;

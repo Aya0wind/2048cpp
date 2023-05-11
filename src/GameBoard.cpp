@@ -5,6 +5,19 @@
 
 #include "Color.hpp"
 #include "Resources.hpp"
+
+namespace  {
+void clear() {
+    #if defined (_WIN32) || defined (_WIN64)
+        system("cls");
+    #elif __linux__
+        system("clear");
+    #else
+        system("clear");
+    #endif
+}
+}
+
 GameBoard::GameBoard(size_t size, size_t width = 6, size_t height = 2)
     : height(height)
     , buffer(height)
@@ -77,7 +90,7 @@ void GameBoard::DrawBoard()
 {
     std::ostringstream tmp;
     size_t middle = height / 2;
-    system("cls");
+    clear();
     tmp << scoreboard << '\n';
     DrawUpLine(tmp);
     int line_num = 0;

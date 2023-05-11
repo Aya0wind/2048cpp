@@ -6,6 +6,19 @@
 #include "Color.hpp"
 #include "Resources.hpp"
 
+namespace  {
+void clear() {
+    #if defined (_WIN32) || defined (_WIN64)
+        system("cls");
+    #elif __linux__
+        system("clear");
+    #else
+        system("clear");
+    #endif
+}
+}
+
+
 int OptionMenu::GetCurrentCursor() const
 {
     return CurrentStage;
@@ -77,7 +90,7 @@ int OptionMenu::GetStageSize()
 void OptionMenu::Draw()
 {
     if (GetEffectiveInput) {
-        system("cls");
+        clear();
         DrawTitle();
         DrawOptions();
         GetEffectiveInput = false;
