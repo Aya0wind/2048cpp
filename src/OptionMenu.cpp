@@ -6,18 +6,18 @@
 #include "Color.hpp"
 #include "Resources.hpp"
 
-namespace  {
-void clear() {
-    #if defined (_WIN32) || defined (_WIN64)
-        system("cls");
-    #elif __linux__
-        system("clear");
-    #else
-        system("clear");
-    #endif
+namespace {
+void clear()
+{
+#if defined(_WIN32) || defined(_WIN64)
+    system("cls");
+#elif __linux__
+    system("clear");
+#else
+    system("clear");
+#endif
 }
-}
-
+}  // namespace
 
 int OptionMenu::GetCurrentCursor() const
 {
@@ -67,7 +67,7 @@ void OptionMenu::ProcessInput()
 {
     using Direction = InputReader::Direction;
     using Key = InputReader::Key;
-    char keyValue=InputReader::ReadInput();
+    char keyValue = InputReader::ReadInput();
     ReadDirection(keyValue);
     switch (InputReader::GetEffectiveOption(keyValue)) {
         case Key::SPACE:
@@ -106,7 +106,7 @@ void OptionMenu::InitMenu()
     DrawOptions();
 }
 
-OptionMenu::OptionMenu(std::string  MenuTitle)
+OptionMenu::OptionMenu(std::string MenuTitle)
     : CurrentStage(1)
     , title(std::move(MenuTitle))
     , GetEffectiveInput(false)

@@ -1,8 +1,9 @@
 #include "InputReader.hpp"
 #ifdef __linux__
-#include <cstdio>
 #include <termios.h>
 #include <unistd.h>
+
+#include <cstdio>
 char InputReader::ReadInput()
 {
     struct termios save, current;
@@ -22,7 +23,25 @@ char InputReader::ReadInput()
 char InputReader::ReadInput()
 {
     return static_cast<char>(_getch());
+}
+#elif __APPLE__
+#include <termios.h>
+#include <unistd.h>
 
+#include <cstdio>
+char InputReader::ReadInput()
+{
+    struct termios save, current;
+    tcgetattr(0, &save);  // 得到原来的终端属性
+    current = save;
+    current.c_lflag &= ~ICANON;  // 设置非正规模式，如果程序每次要从终端读取一个字符的话，这是必须的
+    current.c_lflag &= ~ECHO;         // 关闭回显
+    current.c_cc[ VMIN ] = 1;         // 设置非正规模式下的最小字符数
+    current.c_cc[ VTIME ] = 0;        // 设置非正规模式下的读延时
+    tcsetattr(0, TCSANOW, &current);  // 设置新的终端属性
+    char inputchar = std::getchar();
+    tcsetattr(0, TCSANOW, &save);
+    return inputchar;
 }
 #endif
 

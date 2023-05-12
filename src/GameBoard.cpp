@@ -6,17 +6,18 @@
 #include "Color.hpp"
 #include "Resources.hpp"
 
-namespace  {
-void clear() {
-    #if defined (_WIN32) || defined (_WIN64)
-        system("cls");
-    #elif __linux__
-        system("clear");
-    #else
-        system("clear");
-    #endif
+namespace {
+void clear()
+{
+#if defined(_WIN32) || defined(_WIN64)
+    system("cls");
+#elif __linux__
+    system("clear");
+#else
+    system("clear");
+#endif
 }
-}
+}  // namespace
 
 GameBoard::GameBoard(size_t size, size_t width = 6, size_t height = 2)
     : height(height)
@@ -27,7 +28,7 @@ GameBoard::GameBoard(size_t size, size_t width = 6, size_t height = 2)
     , pause(false)
 {
     std::cout << "\033[?25l" << std::endl;
-    for (auto & num : nums)
+    for (auto& num : nums)
         num.resize(size);
 }
 GameBoard::GameBoard()
@@ -39,7 +40,7 @@ GameBoard::GameBoard()
     , pause(false)
 {
     std::cout << "\033[?25l" << std::endl;
-    for (auto & num : nums)
+    for (auto& num : nums)
         num.resize(size);
 }
 void GameBoard::InitMenu()
@@ -58,7 +59,7 @@ void GameBoard::ProcessInput()
 {
     using Direction = InputReader::Direction;
     using Option = InputReader::Key;
-    char keyValue=InputReader::ReadInput();
+    char keyValue = InputReader::ReadInput();
     Direction direction = InputReader::GetDirection(keyValue);
     Option option = InputReader::GetEffectiveOption(keyValue);
     if (direction != Direction::NONE) {
