@@ -1,7 +1,5 @@
 #include <array>
-/*
- * 游戏所需字符
- */
+
 namespace Resources {
 
 constexpr char horizontal_line[] = "─";
