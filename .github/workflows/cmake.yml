@@ -18,10 +18,16 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
+            prefix: ""
+            suffix: ""
             command: "make"
           - os: windows-latest
+            prefix: "Release/"
+            suffix: ".exe"
             command: "make"
           - os: macos-latest
+            prefix: ""
+            suffix: ""
             command: "make"
     steps:
       - uses: actions/checkout@v3
@@ -59,4 +65,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: 2048cpp-${{matrix.os}}
-          path: ./build/2048
+          path: ./build/${{matrix.prefix}}2048${{matrix.suffix}}
