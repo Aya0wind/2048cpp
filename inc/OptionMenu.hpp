@@ -4,9 +4,6 @@
 
 #include "Menu.hpp"
 
-/*
- * 选择菜单类
- */
 class OptionMenu : public Menu {
 protected:
     std::string title;
@@ -40,7 +37,7 @@ public:
     void SetCurrentCursor(int CursorStage);
     int GetCurrentCursor() const;
     int GetStageSize();
-    explicit OptionMenu(std::string  MenuTitle);
+    explicit OptionMenu(std::string MenuTitle);
     OptionMenu();
     inline void AddOption(const std::string& option)
     {
