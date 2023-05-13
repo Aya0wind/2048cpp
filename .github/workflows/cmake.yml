@@ -6,7 +6,6 @@ on:
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
-
 jobs:
   build:
     # The CMake configure and build commands are platform agnostic and should work equally
@@ -31,27 +30,63 @@ jobs:
             command: "make"
     steps:
       - uses: actions/checkout@v3
+      # Setup Vcpkg Cache
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ${{ github.workspace }}/vcpkg
+          # Look to see if there is a cache hit for the corresponding requirements file
+          key: |
+            ${{ runner.os }}-vcpkg-${{ hashFiles('./vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-vcpkg
+      - name: Setup vcpkg (it does not install any package yet)
+        uses: lukka/run-vcpkg@v11
+        with:
+          # This is the default location of the directory containing vcpkg sources.
+          # Change it to the right location if needed.
+          vcpkgDirectory: "${{ github.workspace }}/vcpkg"
 
+          # If not using a submodule for vcpkg sources, this specifies which commit
+          # id must be checkout from a Git repo.
+          # Note: it must not be set if using a Git submodule for vcpkg.
+          vcpkgGitCommitId: ed8fb07a8bd19568c8594c6f1a04955242f82d35
+
+          # This is the glob expression used to locate the vcpkg.json.
+          # Change it to match a single manifest file you want to use.
+          # Note: do not use `${{ github.context }}` to compose the value as it
+          # contains backslashes that would be misinterpreted. Instead
+          # compose a value relative to the root of the repository using
+          # `**/path/from/root/of/repo/to/vcpkg.json` to match the desired `vcpkg.json`.
+          vcpkgJsonGlob: "${{ github.workspace }}/vcpkg.json"
+
+          # This is only needed if the command `vcpkg install` must run at this step.
+          # Instead it is highly suggested to let `run-cmake` to run vcpkg later on
+          # using the vcpkg.cmake toolchain. The default is `false`.
+          runVcpkgInstall: false
+      # Setup CMake Cache
       - name: Create Build Environment
         # Some projects don't allow in-source building, so create a separate build directory
         # We'll use this as our working directory for all subsequent commands
         run: cmake -E make_directory ${{github.workspace}}/build
       - uses: actions/cache@v3
         with:
-          path: ./build
+          path: |
+            ${{ github.workspace }}/build
           # Look to see if there is a cache hit for the corresponding requirements file
-          key: ${{ runner.os }}-${{ hashFiles('./CMakeLists.txt') }}
+          key: |
+            ${{ runner.os }}-cmake-${{ hashFiles('./CMakeLists.txt') }}
           restore-keys: |
-            ${{ runner.os }}-build
+            ${{ runner.os }}-cmake
+
       - name: Configure CMake
         # Use a bash shell so we can use the same syntax for environment variable
         # access regardless of the host operating system
         shell: bash
-        working-directory: ${{github.workspace}}/build
         # Note the current convention is to use the -S and -B options here to specify source
         # and build directories, but this is only available with CMake 3.13 and higher.
         # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
-        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+        run: cmake -Bbuild $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DVCPKG_ROOT=$VCPKG_ROOT -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
 
       - name: Build
         working-directory: ${{github.workspace}}/build
@@ -65,4 +100,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: 2048cpp-${{matrix.os}}
-          path: ./build/${{matrix.prefix}}2048${{matrix.suffix}}
+          path: ${{ github.workspace }}/build/${{matrix.prefix}}2048${{matrix.suffix}}

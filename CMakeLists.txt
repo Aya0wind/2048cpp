@@ -1,10 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
 project(2048)
 set(CMAKE_CXX_STANDARD 17)
-
-# if(CMAKE_HOST_WIN32)
-# set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-# endif()
+set(VCPKG_BUILD on)
+set(VCPKG_FEATURE_FLAGS manifests)
+set(VCPKG_BUILD_TYPE ${CMAKE_BUILD_TYPE})
 
 # Setup vcpkg
 # if not define CMAKE_TOOLCHAIN_FILE, use VCPKG_ROOT to set it
@@ -18,10 +17,7 @@ endif()
 
 message(STATUS "VCPKG_ROOT: ${VCPKG_ROOT}")
 message(STATUS "CMAKE_TOOLCHAIN_FILE: ${CMAKE_TOOLCHAIN_FILE}")
-set(VCPKG_BUILD on)
-set(VCPKG_FEATURE_FLAGS manifests)
-set(VCPKG_BUILD_TYPE ${CMAKE_BUILD_TYPE})
-
+include(${CMAKE_TOOLCHAIN_FILE})
 find_package(fmt REQUIRED)
 
 # add source files
