@@ -90,7 +90,7 @@ int OptionMenu::GetStageSize()
 void OptionMenu::Draw()
 {
     if (GetEffectiveInput) {
-        clear();
+        ::clear();
         DrawTitle();
         DrawOptions();
         GetEffectiveInput = false;

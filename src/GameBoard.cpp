@@ -91,7 +91,7 @@ void GameBoard::DrawBoard()
 {
     std::ostringstream tmp;
     size_t middle = height / 2;
-    clear();
+    ::clear();
     tmp << scoreboard << '\n';
     DrawUpLine(tmp);
     int line_num = 0;
