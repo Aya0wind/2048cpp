@@ -17,6 +17,12 @@ void clear()
     system("clear");
 #endif
 }
+void windowsPreSet()
+{
+#if defined(_WIN32) || defined(_WIN64)
+    system("chcp 65001");
+#endif
+}
 }  // namespace
 
 /*
@@ -28,6 +34,7 @@ void MenuManager::StartMenu()
     using MenuStatus = Menu::MenuStatus;
     while (Menu::CurrentStatus != Menu::MenuStatus::EXIT) {
         ::clear();
+        ::windowsPreSet();
         Menu::StatusIsChanged = false;
         if (Menu::CurrentStatus == MenuStatus::MAIN_MENU) {
             MainMenu menu;
