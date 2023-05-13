@@ -3,6 +3,7 @@ project(2048)
 set(CMAKE_CXX_STANDARD 17)
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
 set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/inc)
+set(CMAKE_CXX_FLAGS "-static ${CMAKE_CXX_FLAGS}")
 
 file(GLOB SOURCES ${SOURCE_DIR}/*.cpp)
 add_executable(2048 ${SOURCES})
