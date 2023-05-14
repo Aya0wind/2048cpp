@@ -48,5 +48,7 @@ target_link_libraries(sqlite-orm-test
     GTest::gtest
     GTest::gtest_main
 )
+
+target_include_directories(sqlite-orm-test PUBLIC ${INCLUDE_DIR})
 set_target_properties(sqlite-orm-test PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/test)
 gtest_discover_tests(sqlite-orm-test)
