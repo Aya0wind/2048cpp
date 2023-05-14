@@ -4,6 +4,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(VCPKG_BUILD on)
 set(VCPKG_FEATURE_FLAGS manifests)
 set(VCPKG_BUILD_TYPE ${CMAKE_BUILD_TYPE})
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE})
 
 # Setup vcpkg
 # if not define CMAKE_TOOLCHAIN_FILE, use VCPKG_ROOT to set it
@@ -18,7 +19,13 @@ endif()
 message(STATUS "VCPKG_ROOT: ${VCPKG_ROOT}")
 message(STATUS "CMAKE_TOOLCHAIN_FILE: ${CMAKE_TOOLCHAIN_FILE}")
 include(${CMAKE_TOOLCHAIN_FILE})
-find_package(fmt REQUIRED)
+
+# Setup Packages
+find_package(fmt CONFIG REQUIRED)
+find_package(SqliteOrm CONFIG REQUIRED)
+
+# Global link packege
+link_libraries(sqlite_orm::sqlite_orm)
 
 # add source files
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
@@ -29,18 +36,17 @@ target_include_directories(2048 PRIVATE ${INCLUDE_DIR})
 target_link_libraries(2048 PRIVATE fmt::fmt-header-only)
 
 # gtest setup
+find_package(GTest CONFIG REQUIRED)
 enable_testing()
-find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 include(GoogleTest)
 
-# gtest test files
-
-# # test1
-add_executable(test1 test/test1.cpp)
-target_link_libraries(test1
+# # sqlite-orm-test
+add_executable(sqlite-orm-test test/sqlite-orm-test.cpp)
+target_link_libraries(sqlite-orm-test
     PRIVATE
     GTest::gtest
     GTest::gtest_main
 )
-gtest_discover_tests(test1)
+set_target_properties(sqlite-orm-test PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/test)
+gtest_discover_tests(sqlite-orm-test)
