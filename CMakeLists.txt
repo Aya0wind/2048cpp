@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
-project(2048)
+project(2048cpp)
 set(CMAKE_CXX_STANDARD 17)
 set(VCPKG_BUILD on)
 set(VCPKG_FEATURE_FLAGS manifests)
 set(VCPKG_BUILD_TYPE ${CMAKE_BUILD_TYPE})
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE})
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE}/${CMAKE_PROJECT_NAME})
 
 # Setup vcpkg
 # if not define CMAKE_TOOLCHAIN_FILE, use VCPKG_ROOT to set it
@@ -31,9 +31,9 @@ link_libraries(sqlite_orm::sqlite_orm)
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
 set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/inc)
 file(GLOB SOURCES ${SOURCE_DIR}/*.cpp)
-add_executable(2048 ${SOURCES})
-target_include_directories(2048 PRIVATE ${INCLUDE_DIR})
-target_link_libraries(2048 PRIVATE fmt::fmt-header-only)
+add_executable(2048cpp ${SOURCES})
+target_include_directories(2048cpp PRIVATE ${INCLUDE_DIR})
+target_link_libraries(2048cpp PRIVATE fmt::fmt-header-only)
 
 # gtest setup
 find_package(GTest CONFIG REQUIRED)
